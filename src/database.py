@@ -40,9 +40,9 @@ def insert_users(
     """
 
     data = [
-        (user,) #tuple row by row
-        for user in users_df["visitorid"].unique()
-    ]
+    (int(user),)
+    for user in users_df["visitorid"].dropna().unique()
+]
     #insert all rows at once 
     cursor.executemany(
         query,
@@ -70,7 +70,7 @@ def insert_items(items_df: pd.DataFrame) -> None:
     """
 
     data = [
-        (item,)
+        (int(item),)
         for item in items_df["itemid"].unique()
     ]
 
@@ -81,16 +81,14 @@ def insert_items(items_df: pd.DataFrame) -> None:
     cursor.close()
     connection.close()
     
-def insert_interactions(
-    interaction_df: pd.DataFrame
-):
-    """
-    Insert engineered interactions.
-    """
+def insert_interactions(interaction_df):
+
     connection = create_connection()
+
     cursor = connection.cursor()
+
     query = """
-     INSERT INTO interactions(
+    INSERT INTO interactions(
         visitor_id,
         item_id,
         interaction_strength,
@@ -98,28 +96,33 @@ def insert_interactions(
     )
     VALUES (%s, %s, %s, %s)
     """
-    data = list(
-        interaction_df[
-            [
-                "visitorid",
-                "itemid",
-                "interaction_strength",
-                "recency_days"
-            ]
-        ].itertuples(
-            index=False,
-            name=None
-        )
-    )
-    cursor.executemany(
-        query,
-        data
-    )
+    '''Large-scale interaction data was loaded into MySQL using batch processing to reduce memory consumption and improve insertion efficiency.'''
+    
+    batch_size = 10000
 
-    connection.commit()
+    for start in range(0, len(interaction_df), batch_size):
+
+        batch = interaction_df.iloc[start:start+batch_size]
+
+        data = [
+            (
+                int(row.visitorid),
+                int(row.itemid),
+                int(row.interaction_strength),
+                int(row.recency_days)
+            )
+            for row in batch.itertuples(index=False)
+        ]
+
+        cursor.executemany(query, data)
+
+        connection.commit()
+
+        print(
+            f"Inserted {min(start + batch_size, len(interaction_df))} rows"
+        )
 
     cursor.close()
-
     connection.close()
     
 #Read Data Back

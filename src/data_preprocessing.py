@@ -18,9 +18,9 @@ def convert_timestamp(
     into datetime format.
     """
 
-    df["datetime"] = pd.to_datetime(
-        df[timestamp_column],
-        unit="ms"
+    df[timestamp_column] = pd.to_datetime(
+    df[timestamp_column],
+    unit="ms"
     )
 
     return df
@@ -135,20 +135,22 @@ def validate_dataset(
     )
 
 
-def save_processed_data(
+def save_to_database(
     df: pd.DataFrame,
-    output_path: str
+    table_name: str,
+    engine
 ) -> None:
     """
-    Save processed dataframe.
+    Save dataframe to MySQL table.
     """
 
-    df.to_csv(
-        output_path,
+    df.to_sql(
+        name=table_name,
+        con=engine,
+        if_exists="replace",
         index=False
     )
 
     print(
-        f"Dataset saved to: "
-        f"{output_path}"
+        f"Table '{table_name}' saved successfully."
     )

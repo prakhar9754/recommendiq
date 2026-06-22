@@ -7,21 +7,6 @@ Generate machine learning features from cleaned RetailRocket data.
 
 import pandas as pd
 
-
-def create_event_scores(events_df: pd.DataFrame) -> pd.DataFrame:
-
-    #Encode event types into numerical scores.
-    event_mapping = {
-        "view": 1,
-        "addtocart": 2,
-        "transaction": 3
-    }
-
-    events_df["event_score"] = events_df["event"].map(event_mapping)
-
-    return events_df
-
-
 def create_interaction_strength(events_df: pd.DataFrame) -> pd.DataFrame: 
     #Input  : DataFrame
     #Output : DataFrame
@@ -40,17 +25,18 @@ def create_interaction_strength(events_df: pd.DataFrame) -> pd.DataFrame:
     return events_df
 
 
-def create_recency_feature(events_df: pd.DataFrame) -> pd.DataFrame:
-   
-    #Create recency feature in days.
-    events_df["datetime"] = pd.to_datetime(
-        events_df["datetime"]
+def create_recency_feature(
+    events_df: pd.DataFrame
+) -> pd.DataFrame:
+
+    events_df["timestamp"] = pd.to_datetime(
+        events_df["timestamp"]
     )
 
-    max_date = events_df["datetime"].max() #recent date
+    max_date = events_df["timestamp"].max()
 
     events_df["recency_days"] = (
-        max_date - events_df["datetime"]
+        max_date - events_df["timestamp"]
     ).dt.days
 
     return events_df
@@ -127,16 +113,19 @@ def build_feature_pipeline(
 ) -> pd.DataFrame:
     """
     Main feature engineering pipeline.
+    
+    This is now producing:
+    visitorid
+    total_interactions
+    avg_interaction_strength
     """
 
-    events_df = create_event_scores(events_df)
 
     events_df = create_interaction_strength(events_df)
 
     events_df = create_recency_feature(events_df)
 
-    final_features = create_user_item_features(
-        events_df
-    )
-
-    return final_features
+    customer_features = create_user_features(
+    events_df
+     )
+    return customer_features

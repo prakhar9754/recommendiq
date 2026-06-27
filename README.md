@@ -1,73 +1,159 @@
 # RecommendIQ
+
 ## AI-Powered Recommendation & Personalization Engine
 
-RecommendIQ is an end-to-end Machine Learning project designed to build a personalized recommendation system using real-world e-commerce user interaction data.
+RecommendIQ is an end-to-end Machine Learning project that builds an intelligent recommendation and personalization system using the RetailRocket e-commerce dataset.
 
-The system analyzes user behavior, product interactions, and engagement patterns to generate intelligent and personalized recommendations.
+The project follows a production-oriented machine learning workflow, starting from raw data ingestion into MySQL, followed by data preprocessing, exploratory analysis, feature engineering, customer segmentation, recommendation generation, personalization, API development, Docker containerization, and cloud deployment.
 
 ---
 
 # Project Objectives
 
-- Build a scalable recommendation system
-- Understand user behavior and interaction patterns
-- Create personalized product recommendations
-- Implement customer segmentation
-- Develop ranking and recommendation pipelines
-- Deploy recommendation APIs using FastAPI
-- Upgrade the system later using Deep Learning techniques
+* Build a scalable recommendation and personalization system
+* Analyze customer behavior using interaction data
+* Engineer meaningful behavioral features
+* Segment customers using machine learning
+* Develop recommendation algorithms
+* Build personalized recommendation pipelines
+* Serve recommendations through FastAPI APIs
+* Containerize the application using Docker
+* Deploy the complete system on a free cloud platform
+* Design a modular architecture suitable for production environments
+
+---
+
+# Current Project Workflow
+
+```text
+RetailRocket Dataset
+        │
+        ▼
+Load Raw Data into MySQL
+        │
+        ▼
+Data Understanding
+        │
+        ▼
+Data Cleaning
+        │
+        ▼
+Cleaned Data (MySQL)
+        │
+        ▼
+Exploratory Data Analysis
+        │
+        ▼
+Feature Engineering
+        │
+        ▼
+customer_features.csv
+        │
+        ▼
+Customer Segmentation
+        │
+        ▼
+Recommendation Engine
+        │
+        ▼
+Personalization Engine
+        │
+        ▼
+Model Evaluation
+        │
+        ▼
+FastAPI
+        │
+        ▼
+Docker
+        │
+        ▼
+Free Cloud Deployment
+```
 
 ---
 
 # Features
 
-- User behavior analysis
-- Product recommendation engine
-- Personalized recommendations
-- Popularity-based recommendations
-- Content-based recommendation system
-- Customer segmentation
-- FastAPI backend APIs
-- Modular project architecture
-- Future Deep Learning integration
+* End-to-end machine learning pipeline
+* MySQL-based data management
+* Modular preprocessing pipeline
+* Customer behavior analysis
+* Feature engineering
+* Customer segmentation using K-Means
+* Recommendation engine
+* Personalized recommendations
+* Model evaluation
+* FastAPI backend
+* Docker-ready project structure
+* Cloud deployment ready
+* Modular and reusable architecture
 
 ---
 
 # Tech Stack
 
+## Programming
+
+* Python
+
+## Data Processing
+
+* Pandas
+* NumPy
+
 ## Machine Learning
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
+
+* Scikit-learn
+
+## Database
+
+* MySQL
+* SQLAlchemy
+* mysql-connector-python
 
 ## Visualization
-- Matplotlib
-- Seaborn
+
+* Matplotlib
+* Seaborn
 
 ## Backend
-- FastAPI
-- Uvicorn
+
+* FastAPI
+* Uvicorn
+
+## Deployment
+
+* Docker
+* Free Cloud Platform (planned)
 
 ## Version Control
-- Git
-- GitHub
+
+* Git
+* GitHub
 
 ---
 
 # Dataset
 
-Dataset used:
-RetailRocket E-commerce Recommendation Dataset
+**RetailRocket E-commerce Recommendation Dataset**
 
-Dataset includes:
-- User interactions
-- Product metadata
-- Category hierarchy
-- Transaction events
+The dataset contains real-world anonymous e-commerce interaction logs.
+
+### Included Files
+
+* Events
+* Item Properties (Part 1)
+* Item Properties (Part 2)
+* Category Tree
+
+### User Interactions
+
+* View
+* Add to Cart
+* Transaction
 
 ---
-
 
 # Project Structure
 
@@ -75,36 +161,35 @@ Dataset includes:
 RecommendIQ/
 
 │── data/
-│   ├── raw/
-│   │   ├── events.csv
-│   │   ├── item_properties_part1.csv
-│   │   ├── item_properties_part2.csv
-│   │   └── category_tree.csv
+│   ├── features/
+│   │   ├── customer_features.csv
+│   │   └── customer_segments.csv
 │   │
-│   └── processed/
+│   └── raw/
 │
 │── notebooks/
-│   ├── 01_problem_framing.ipynb
-│   ├── 02_data_understanding.ipynb
-│   ├── 03_data_cleaning.ipynb
-│   ├── 04_exploratory_data_analysis.ipynb
-│   ├── 05_feature_engineering.ipynb
-│   ├── 06_customer_segmentation.ipynb
-│   ├── 07_recommendation_engine.ipynb
-│   ├── 08_personalization_engine.ipynb
-│   ├── 09_model_evaluation.ipynb
-│   └── 10_api_testing.ipynb
+│   ├── 00_load_raw_data.ipynb
+│   ├── 01_data_understanding.ipynb
+│   ├── 02_data_cleaning.ipynb
+│   ├── 03_eda.ipynb
+│   ├── 04_feature_engineering.ipynb
+│   ├── 05_customer_segmentation.ipynb
+│   ├── 06_recommendation_engine.ipynb
+│   ├── 07_personalization_engine.ipynb
+│   ├── 08_model_evaluation.ipynb
+│   └── 09_api_testing.ipynb
 │
 │── src/
+│   ├── database.py
 │   ├── data_preprocessing.py
 │   ├── feature_engineering.py
 │   ├── segmentation.py
 │   ├── recommender.py
-│   └── personalization.py
+│   ├── personalization.py
+│   └── feedback.py
 │
 │── api/
-│   ├── main.py
-│   └── schema.py
+│
 │
 │── models/
 │
@@ -112,3 +197,33 @@ RecommendIQ/
 │── README.md
 │── .gitignore
 ```
+
+---
+
+# Machine Learning Pipeline
+
+1. Load raw RetailRocket data into MySQL.
+2. Perform data understanding and validation.
+3. Clean and preprocess datasets.
+4. Store cleaned datasets in MySQL.
+5. Perform exploratory data analysis.
+6. Engineer customer behavioral features.
+7. Segment customers using K-Means clustering.
+8. Generate recommendation candidates.
+9. Personalize recommendations based on customer behavior.
+10. Evaluate recommendation quality.
+11. Build FastAPI endpoints.
+12. Containerize using Docker.
+13. Deploy the application to a free cloud platform.
+
+---
+
+# Future Enhancements
+
+* Hybrid Recommendation System
+* Deep Learning-based Recommendation Models
+* Real-time Recommendation API
+* User Feedback Loop
+* Model Monitoring
+* Automated Retraining Pipeline
+* Kubernetes Deployment

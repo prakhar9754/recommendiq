@@ -128,15 +128,21 @@ def map_cluster_names(segmented_df):
 
     return final_df
 
-def save_models(scaler, kmeans,
-                scaler_path="../artifacts/scaler.pkl",
-                model_path="../artifacts/kmeans_model.pkl"):
+import os
+
+def save_models(
+    scaler,
+    kmeans,
+    scaler_path="../artifacts/scaler.pkl",
+    model_path="../artifacts/kmeans_model.pkl"
+):
     """
     Save the trained scaler and K-Means model.
-    Returns
-    -------
-    None
     """
+
+    # Create artifacts folder if it doesn't exist
+    os.makedirs(os.path.dirname(scaler_path), exist_ok=True)
+    os.makedirs(os.path.dirname(model_path), exist_ok=True)
 
     # Save scaler
     joblib.dump(scaler, scaler_path)

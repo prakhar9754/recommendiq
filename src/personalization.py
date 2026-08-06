@@ -57,11 +57,10 @@ class PersonalizationEngine:
         suffixes=("", "_user")
         )
 
-        personalized["personalization_score"] =
-        (
-        0.60 * personalized["updated_score"] +
-        0.25 * personalized["feedback_score_user"] +
-        0.15 * personalized["updated_score_user"]
+        personalized["personalization_score"] = (
+            0.60 * personalized["updated_score"] +
+            0.25 * personalized["feedback_score_user"] +
+            0.15 * personalized["updated_score_user"]
         )
 
         personalized["personalization_score"] = (
@@ -91,8 +90,7 @@ class PersonalizationEngine:
     def save_personalized_recommendations(
     self,
     personalized,
-    output_path
-):
+    output_path):
         """
         Save personalized recommendations to CSV.
         """

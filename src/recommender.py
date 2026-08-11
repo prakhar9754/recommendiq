@@ -28,12 +28,32 @@ def load_interaction_data(file_path):
 
     return interaction_df
 
-def create_interaction_matrix(interaction_df):
+def create_interaction_matrix(interaction_df, max_rows=10000):
     """
-    Create a user-item interaction matrix.
+    Create a smaller user-item interaction matrix
+    to avoid memory errors.
     """
 
-    # Create pivot table
+    # Take only 10,000 interactions
+    if len(interaction_df) > max_rows:
+        interaction_df = interaction_df.sample(
+            n=max_rows,
+            random_state=42
+        )
+
+    print("=" * 50)
+    print("Creating interaction matrix")
+    print(f"Interactions used : {len(interaction_df)}")
+    print(
+        f"Unique users      : "
+        f"{interaction_df['visitorid'].nunique()}"
+    )
+    print(
+        f"Unique items      : "
+        f"{interaction_df['itemid'].nunique()}"
+    )
+    print("=" * 50)
+
     interaction_matrix = interaction_df.pivot_table(
         index="visitorid",
         columns="itemid",
@@ -43,8 +63,8 @@ def create_interaction_matrix(interaction_df):
 
     print("=" * 50)
     print("Interaction matrix created successfully.")
-    print(f"Number of users : {interaction_matrix.shape[0]}")
-    print(f"Number of items : {interaction_matrix.shape[1]}")
+    print(f"Users  : {interaction_matrix.shape[0]}")
+    print(f"Items  : {interaction_matrix.shape[1]}")
     print("=" * 50)
 
     return interaction_matrix

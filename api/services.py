@@ -6,7 +6,7 @@ Contains the business logic for the RecommendIQ API.
 """
 
 import pandas as pd
-
+import joblib
 from src import segmentation # type: ignore
 from src import recommender #type:ignore
 
@@ -15,15 +15,17 @@ from src import recommender #type:ignore
 # File Paths
 # --------------------------------------------------
 
-CUSTOMER_FEATURES = "../data/features/customer_features.csv"
+from pathlib import Path
 
-USER_ITEM_FEATURES = "../data/features/user_item_features.csv"
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-SEGMENT_MODEL = "../artifacts/kmeans_model.pkl"
+CUSTOMER_FEATURES = BASE_DIR / "data" / "features" / "customer_features.csv"
 
-SCALER_MODEL = "../artifacts/scaler.pkl"
+USER_ITEM_FEATURES = BASE_DIR / "data" / "features" / "user_item_features.csv"
 
-SIMILARITY_MODEL = "../artifacts/item_similarity.pkl"
+SEGMENTATION_PIPELINE = BASE_DIR / "artifacts" / "segmentation_pipeline.pkl"
+
+SIMILARITY_MODEL = BASE_DIR / "artifacts" / "item_similarity.pkl"
 
 
 # --------------------------------------------------
@@ -35,15 +37,17 @@ def get_customer_segment(visitorid: int):
     Predict customer segment.
     """
 
+    # Load customer features
     customer_df = segmentation.load_customer_features(
         CUSTOMER_FEATURES
     )
 
-    scaler, kmeans = segmentation.load_models(
-        scaler_path=SCALER_MODEL,
-        model_path=SEGMENT_MODEL
+    # Load segmentation pipeline
+    pipeline = joblib.load(
+        SEGMENTATION_PIPELINE
     )
 
+    # Find customer
     customer = customer_df[
         customer_df["visitorid"] == visitorid
     ]
@@ -51,17 +55,29 @@ def get_customer_segment(visitorid: int):
     if customer.empty:
         return None
 
+    # Remove ID column
     features = customer.drop(columns=["visitorid"])
 
-    cluster, segment = segmentation.predict_customer_segment(
-        features,
-        scaler,
-        kmeans
+    # Predict cluster
+    cluster = pipeline.predict(features)[0]
+
+    # Map cluster number to name
+    cluster_mapping = {
+        0: "Browsers",
+        1: "Inactive",
+        2: "Regular Users",
+        3: "Buyers",
+        4: "Cart Users"
+    }
+
+    segment = cluster_mapping.get(
+        cluster,
+        "Unknown"
     )
 
     return {
         "visitorid": visitorid,
-        "cluster": cluster,
+        "cluster": int(cluster),
         "customer_segment": segment
     }
 
@@ -75,17 +91,22 @@ def get_recommendations(
     top_n: int = 10
 ):
     """
-    Generate recommendations.
+    Generate personalized recommendations.
+    If personalized recommendations are unavailable,
+    return popular items instead.
     """
 
+    # Load interaction data
     interaction_df = recommender.load_interaction_data(
         USER_ITEM_FEATURES
     )
 
+    # Load item similarity model
     similarity_df = recommender.load_recommender(
         SIMILARITY_MODEL
     )
 
+    # Try personalized recommendations
     recommendations = (
         recommender.recommend_for_existing_user(
             visitorid=visitorid,
@@ -95,12 +116,21 @@ def get_recommendations(
         )
     )
 
+    # If personalized recommendations are empty,
+    # use popular items
+    if not recommendations:
+
+        recommendations = (
+            recommender.recommend_for_new_user(
+                interaction_df,
+                top_n=top_n
+            )
+        )
+
     return {
         "visitorid": visitorid,
         "recommendations": recommendations
     }
-
-
 # --------------------------------------------------
 # Popular Recommendations
 # --------------------------------------------------

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>RecommendIQ | AI Recommendation Platform</title>
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Main CSS -->
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         APP CONTAINER
+    ====================================================== -->
+
+    <div class="app-container">
+
+
+        <!-- =================================================
+             SIDEBAR
+        ================================================== -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-header">
+
+                <div class="brand-logo">
+                    RQ
+                </div>
+
+                <div class="brand-text">
+                    <h2>RecommendIQ</h2>
+                    <span>AI Intelligence</span>
+                </div>
+
+            </div>
+
+
+            <!-- Navigation -->
+
+            <nav class="navigation">
+
+                <p class="nav-title">
+                    MAIN MENU
+                </p>
+
+                <a
+                    href="#"
+                    class="nav-item active"
+                    data-page="dashboard"
+                >
+                    <span class="nav-icon">⌂</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a
+                    href="#"
+                    class="nav-item"
+                    data-page="customers"
+                >
+                    <span class="nav-icon">◉</span>
+                    <span>Customers</span>
+                </a>
+
+                <a
+                    href="#"
+                    class="nav-item"
+                    data-page="recommendations"
+                >
+                    <span class="nav-icon">✦</span>
+                    <span>Recommendations</span>
+                </a>
+
+                <a
+                    href="#"
+                    class="nav-item"
+                    data-page="segments"
+                >
+                    <span class="nav-icon">◈</span>
+                    <span>Segments</span>
+                </a>
+
+                <a
+                    href="#"
+                    class="nav-item"
+                    data-page="feedback"
+                >
+                    <span class="nav-icon">♡</span>
+                    <span>Feedback</span>
+                </a>
+
+                <p class="nav-title analytics-title">
+                    INSIGHTS
+                </p>
+
+                <a
+                    href="#"
+                    class="nav-item"
+                    data-page="analytics"
+                >
+                    <span class="nav-icon">▥</span>
+                    <span>Analytics</span>
+                </a>
+
+            </nav>
+
+
+            <!-- Sidebar Bottom -->
+
+            <div class="sidebar-bottom">
+
+                <div class="system-status">
+
+                    <span class="status-dot"></span>
+
+                    <div>
+                        <strong>System Online</strong>
+                        <small>API connected</small>
+                    </div>
+
+                </div>
+
+                <a href="#" class="nav-item settings-item">
+                    <span class="nav-icon">⚙</span>
+                    <span>Settings</span>
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAIN CONTENT
+        ================================================== -->
+
+        <main class="main-content">
+
+
+            <!-- =================================================
+                 TOP BAR
+            ================================================== -->
+
+            <header class="topbar">
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu"
+                    aria-label="Open menu"
+                >
+                    ☰
+                </button>
+
+                <div class="page-title">
+
+                    <span class="breadcrumb">
+                        Workspace
+                    </span>
+
+                    <h1>Dashboard</h1>
+
+                </div>
+
+
+                <div class="topbar-actions">
+
+                    <button
+                        class="icon-button"
+                        title="Notifications"
+                    >
+                        ♧
+                        <span class="notification-dot"></span>
+                    </button>
+
+                    <div class="profile">
+
+                        <div class="profile-avatar">
+                            A
+                        </div>
+
+                        <div class="profile-info">
+                            <strong>Admin</strong>
+                            <span>Administrator</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 DASHBOARD CONTENT
+            ================================================== -->
+
+            <section class="dashboard-content">
+
+
+                <!-- Welcome -->
+
+                <div class="welcome-section">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            AI-POWERED CUSTOMER INTELLIGENCE
+                        </p>
+
+                        <h2>
+                            Welcome back 👋
+                        </h2>
+
+                        <p class="welcome-description">
+                            Monitor recommendations, understand
+                            customer behavior, and personalize
+                            experiences with AI.
+                        </p>
+
+                    </div>
+
+                    <button class="primary-button">
+
+                        <span>✦</span>
+
+                        Generate Insights
+
+                    </button>
+
+                </div>
+
+
+                <!-- =================================================
+                     KPI CARDS
+                ================================================== -->
+
+                <div class="stats-grid">
+
+
+                    <!-- Customers -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-header">
+
+                            <div class="stat-icon purple">
+                                ◉
+                            </div>
+
+                            <span class="stat-change positive">
+                                ↑ 12.4%
+                            </span>
+
+                        </div>
+
+                        <p class="stat-label">
+                            Total Customers
+                        </p>
+
+                        <h3>
+                            1.4M
+                        </h3>
+
+                        <p class="stat-footer">
+                            Active customer profiles
+                        </p>
+
+                    </div>
+
+
+                    <!-- Recommendations -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-header">
+
+                            <div class="stat-icon blue">
+                                ✦
+                            </div>
+
+                            <span class="stat-change positive">
+                                ↑ 8.7%
+                            </span>
+
+                        </div>
+
+                        <p class="stat-label">
+                            Recommendations
+                        </p>
+
+                        <h3>
+                            2.8M
+                        </h3>
+
+                        <p class="stat-footer">
+                            Items recommended
+                        </p>
+
+                    </div>
+
+
+                    <!-- Segments -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-header">
+
+                            <div class="stat-icon green">
+                                ◈
+                            </div>
+
+                            <span class="stat-change">
+                                Stable
+                            </span>
+
+                        </div>
+
+                        <p class="stat-label">
+                            Customer Segments
+                        </p>
+
+                        <h3>
+                            5
+                        </h3>
+
+                        <p class="stat-footer">
+                            Behavioral segments
+                        </p>
+
+                    </div>
+
+
+                    <!-- Feedback -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-header">
+
+                            <div class="stat-icon orange">
+                                ♡
+                            </div>
+
+                            <span class="stat-change positive">
+                                ↑ 5.2%
+                            </span>
+
+                        </div>
+
+                        <p class="stat-label">
+                            Positive Feedback
+                        </p>
+
+                        <h3>
+                            84.9%
+                        </h3>
+
+                        <p class="stat-footer">
+                            Customer preference signal
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                
+<!-- =================================================
+     CUSTOMER SEARCH
+================================================== -->
+
+<div class="customer-search-panel">
+
+    <div class="customer-search-content">
+
+        <div class="search-info">
+
+            <p class="panel-eyebrow">
+                CUSTOMER INTELLIGENCE
+            </p>
+
+            <h3>
+                Find a Customer
+            </h3>
+
+            <p>
+                Enter a Visitor ID to view customer
+                segment and personalized recommendations.
+            </p>
+
+        </div>
+
+
+        <div class="customer-search-form">
+
+            <input
+                type="number"
+                id="visitorIdInput"
+                placeholder="Enter Visitor ID"
+            >
+
+            <button
+                type="button"
+                id="searchCustomerButton"
+                class="primary-button"
+            >
+                <span>⌕</span>
+                Search Customer
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Customer Result -->
+
+    <div
+        class="customer-result"
+        id="customerResult"
+    >
+
+        <div class="customer-result-item">
+
+            <span>
+                Customer Segment
+            </span>
+
+            <strong id="customerSegment">
+                --
+            </strong>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =================================================
+     RECOMMENDATION RESULTS
+================================================== -->
+
+<div class="panel recommendation-panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <p class="panel-eyebrow">
+                AI RECOMMENDATIONS
+            </p>
+
+            <h3>
+                Recommended Products
+            </h3>
+
+        </div>
+
+        <span
+            class="recommendation-status"
+            id="recommendationStatus"
+        >
+            Waiting for customer
+        </span>
+
+    </div>
+
+
+    <!-- Recommendation Cards -->
+
+    <div
+        class="recommendation-grid"
+        id="recommendationGrid"
+    >
+
+        <div class="recommendation-empty">
+
+            <div class="empty-icon">
+                ✦
+            </div>
+
+            <h4>
+                No Recommendations Yet
+            </h4>
+
+            <p>
+                Search for a customer to generate
+                personalized recommendations.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =================================================
+     MAIN ANALYTICS GRID
+================================================== -->
+
+<div class="analytics-grid">
+
+
+                    <!-- Recommendation Activity -->
+
+                    <div class="panel large-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <p class="panel-eyebrow">
+                                    PERFORMANCE
+                                </p>
+
+                                <h3>
+                                    Recommendation Activity
+                                </h3>
+
+                            </div>
+
+                            <button class="period-button">
+                                Last 7 days
+                                <span>⌄</span>
+                            </button>
+
+                        </div>
+
+
+                        <div class="chart-placeholder">
+
+                            <div class="chart-y-axis">
+
+                                <span>100k</span>
+                                <span>75k</span>
+                                <span>50k</span>
+                                <span>25k</span>
+                                <span>0</span>
+
+                            </div>
+
+                            <div class="chart-area">
+
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+
+                                <div class="chart-bars">
+
+                                    <div class="bar" style="height: 42%;">
+                                        <span>Mon</span>
+                                    </div>
+
+                                    <div class="bar" style="height: 58%;">
+                                        <span>Tue</span>
+                                    </div>
+
+                                    <div class="bar" style="height: 47%;">
+                                        <span>Wed</span>
+                                    </div>
+
+                                    <div class="bar" style="height: 71%;">
+                                        <span>Thu</span>
+                                    </div>
+
+                                    <div class="bar" style="height: 63%;">
+                                        <span>Fri</span>
+                                    </div>
+
+                                    <div class="bar" style="height: 84%;">
+                                        <span>Sat</span>
+                                    </div>
+
+                                    <div class="bar active-bar" style="height: 76%;">
+                                        <span>Sun</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Segment Overview -->
+
+                    <div class="panel segment-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <p class="panel-eyebrow">
+                                    CUSTOMER INTELLIGENCE
+                                </p>
+
+                                <h3>
+                                    Segment Overview
+                                </h3>
+
+                            </div>
+
+                            <button class="more-button">
+                                ⋮
+                            </button>
+
+                        </div>
+
+
+                        <div class="segment-list">
+
+
+                            <div class="segment-row">
+
+                                <div class="segment-name">
+
+                                    <span class="segment-dot browsers"></span>
+
+                                    <span>Browsers</span>
+
+                                </div>
+
+                                <strong>45.1%</strong>
+
+                            </div>
+
+                            <div class="segment-progress">
+                                <span style="width: 45.1%;"></span>
+                            </div>
+
+
+                            <div class="segment-row">
+
+                                <div class="segment-name">
+
+                                    <span class="segment-dot inactive"></span>
+
+                                    <span>Inactive</span>
+
+                                </div>
+
+                                <strong>41.1%</strong>
+
+                            </div>
+
+                            <div class="segment-progress">
+                                <span style="width: 41.1%;"></span>
+                            </div>
+
+
+                            <div class="segment-row">
+
+                                <div class="segment-name">
+
+                                    <span class="segment-dot regular"></span>
+
+                                    <span>Regular Users</span>
+
+                                </div>
+
+                                <strong>11.4%</strong>
+
+                            </div>
+
+                            <div class="segment-progress">
+                                <span style="width: 11.4%;"></span>
+                            </div>
+
+
+                            <div class="segment-row">
+
+                                <div class="segment-name">
+
+                                    <span class="segment-dot buyers"></span>
+
+                                    <span>Buyers</span>
+
+                                </div>
+
+                                <strong>0.8%</strong>
+
+                            </div>
+
+                            <div class="segment-progress">
+                                <span style="width: 0.8%;"></span>
+                            </div>
+
+
+                            <div class="segment-row">
+
+                                <div class="segment-name">
+
+                                    <span class="segment-dot cart"></span>
+
+                                    <span>Cart Users</span>
+
+                                </div>
+
+                                <strong>1.6%</strong>
+
+                            </div>
+
+                            <div class="segment-progress">
+                                <span style="width: 1.6%;"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     BOTTOM PANELS
+                ================================================== -->
+
+                <div class="bottom-grid">
+
+
+                    <!-- AI Engine Status -->
+
+                    <div class="panel ai-panel">
+
+                        <div class="ai-glow"></div>
+
+                        <div class="ai-content">
+
+                            <div class="ai-icon">
+                                ✦
+                            </div>
+
+                            <div>
+
+                                <p class="panel-eyebrow">
+                                    RECOMMENDATION ENGINE
+                                </p>
+
+                                <h3>
+                                    AI Engine is Ready
+                                </h3>
+
+                                <p>
+                                    Your recommendation pipeline
+                                    is running and ready to generate
+                                    personalized results.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="engine-status">
+
+                            <span class="status-dot"></span>
+
+                            All systems operational
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Quick Actions -->
+
+                    <div class="panel quick-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <p class="panel-eyebrow">
+                                    QUICK ACTIONS
+                                </p>
+
+                                <h3>
+                                    Explore RecommendIQ
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div class="quick-actions">
+
+                            <button class="quick-action">
+                                <span>◉</span>
+                                Find Customer
+                            </button>
+
+                            <button class="quick-action">
+                                <span>✦</span>
+                                Generate Recommendations
+                            </button>
+
+                            <button class="quick-action">
+                                <span>◈</span>
+                                View Segments
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- Main JavaScript -->
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

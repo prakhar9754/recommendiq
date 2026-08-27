@@ -40,11 +40,9 @@ body {
     font-family: "Inter", sans-serif;
 
     background:
-        radial-gradient(
-            circle at 80% 10%,
+        radial-gradient(circle at 80% 10%,
             rgba(91, 33, 182, 0.10),
-            transparent 25%
-        ),
+            transparent 25%),
         var(--bg-primary);
 
     color: var(--text-primary);
@@ -132,11 +130,9 @@ a {
     color: white;
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #8b5cf6,
-            #4f46e5
-        );
+            #4f46e5);
 
     box-shadow:
         0 8px 25px rgba(124, 58, 237, 0.3);
@@ -238,11 +234,9 @@ a {
     color: white;
 
     background:
-        linear-gradient(
-            90deg,
+        linear-gradient(90deg,
             rgba(139, 92, 246, 0.18),
-            rgba(139, 92, 246, 0.05)
-        );
+            rgba(139, 92, 246, 0.05));
 
     border: 1px solid rgba(139, 92, 246, 0.15);
 }
@@ -466,11 +460,9 @@ a {
     border-radius: 50%;
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #6d28d9,
-            #2563eb
-        );
+            #2563eb);
 
     font-size: 12px;
 
@@ -589,11 +581,9 @@ a {
     border-radius: 10px;
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #8b5cf6,
-            #6366f1
-        );
+            #6366f1);
 
     color: white;
 
@@ -772,8 +762,7 @@ a {
     display: grid;
 
     grid-template-columns:
-        minmax(0, 1.7fr)
-        minmax(300px, 1fr);
+        minmax(0, 1.7fr) minmax(300px, 1fr);
 
     gap: 18px;
 
@@ -923,11 +912,9 @@ a {
     border-radius: 6px 6px 2px 2px;
 
     background:
-        linear-gradient(
-            to top,
+        linear-gradient(to top,
             rgba(99, 102, 241, 0.2),
-            rgba(139, 92, 246, 0.65)
-        );
+            rgba(139, 92, 246, 0.65));
 
     transition: 0.3s ease;
 }
@@ -936,11 +923,9 @@ a {
 .active-bar {
 
     background:
-        linear-gradient(
-            to top,
+        linear-gradient(to top,
             rgba(99, 102, 241, 0.5),
-            #a78bfa
-        );
+            #a78bfa);
 
     box-shadow:
         0 0 25px rgba(139, 92, 246, 0.15);
@@ -1057,11 +1042,9 @@ a {
     border-radius: inherit;
 
     background:
-        linear-gradient(
-            90deg,
+        linear-gradient(90deg,
             #6366f1,
-            #8b5cf6
-        );
+            #8b5cf6);
 }
 
 
@@ -1091,11 +1074,9 @@ a {
     overflow: hidden;
 
     background:
-        radial-gradient(
-            circle at 90% 30%,
+        radial-gradient(circle at 90% 30%,
             rgba(139, 92, 246, 0.13),
-            transparent 35%
-        ),
+            transparent 35%),
         var(--bg-card);
 }
 
@@ -1143,11 +1124,9 @@ a {
     color: #c4b5fd;
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             rgba(139, 92, 246, 0.25),
-            rgba(59, 130, 246, 0.15)
-        );
+            rgba(59, 130, 246, 0.15));
 
     font-size: 18px;
 }
@@ -1417,6 +1396,7 @@ a {
         padding-right: 16px;
     }
 }
+
 /* ========================================================
    CUSTOMER SEARCH
 ======================================================== */
@@ -1516,6 +1496,7 @@ a {
         white-space: nowrap;
     }
 }
+
 /* ========================================================
    RECOMMENDATION PANEL
 ======================================================== */
@@ -1556,8 +1537,7 @@ a {
 
     overflow: hidden;
 
-    border: 1px solid
-        var(--border-color);
+    border: 1px solid var(--border-color);
 
     border-radius: 14px;
 
@@ -1577,8 +1557,7 @@ a {
         translateY(-4px);
 
     box-shadow:
-        0 10px 25px
-        rgba(0, 0, 0, 0.08);
+        0 10px 25px rgba(0, 0, 0, 0.08);
 
 }
 
@@ -1598,11 +1577,9 @@ a {
     justify-content: center;
 
     background:
-        linear-gradient(
-            135deg,
+        linear-gradient(135deg,
             #f3f4ff,
-            #eef2ff
-        );
+            #eef2ff);
 
     font-size: 32px;
 
@@ -1744,5 +1721,372 @@ a {
             1fr;
 
     }
+
+}
+
+/* ========================================================
+   PREMIUM RECOMMENDATION CARDS
+======================================================== */
+
+
+.recommendation-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border:
+        1px solid var(--border-color);
+
+    border-radius: 16px;
+
+    background:
+        var(--card-background);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+
+}
+
+
+.recommendation-card:hover {
+
+    transform:
+        translateY(-6px);
+
+    box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.08);
+
+}
+
+
+/* ========================================================
+   IMAGE AREA
+======================================================== */
+
+
+.recommendation-image {
+
+    position: relative;
+
+    height: 145px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(135deg,
+            #f5f7ff,
+            #eef1ff);
+
+}
+
+
+.recommendation-icon {
+
+    font-size: 38px;
+
+    transition:
+        transform 0.25s ease;
+
+}
+
+
+.recommendation-card:hover .recommendation-icon {
+
+    transform:
+        scale(1.15) rotate(8deg);
+
+}
+
+
+/* ========================================================
+   RANK
+======================================================== */
+
+
+.recommendation-rank {
+
+    position: absolute;
+
+    top: 12px;
+
+    left: 12px;
+
+    padding:
+        5px 9px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255, 255, 255, 0.9);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+/* ========================================================
+   CONTENT
+======================================================== */
+
+
+.recommendation-content {
+
+    padding: 18px;
+
+}
+
+
+.recommendation-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+
+}
+
+
+.recommendation-label {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+
+}
+
+
+.recommendation-score {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+.recommendation-content h4 {
+
+    margin:
+        4px 0 7px;
+
+    font-size: 16px;
+
+}
+
+
+.recommendation-content p {
+
+    margin: 0;
+
+    min-height: 38px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    color:
+        var(--text-secondary);
+
+}
+
+
+/* ========================================================
+   SCORE BAR
+======================================================== */
+
+
+.score-container {
+
+    margin-top: 15px;
+
+}
+
+
+.score-bar {
+
+    width: 100%;
+
+    height: 5px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background:
+        #eceef5;
+
+}
+
+
+.score-progress {
+
+    height: 100%;
+
+    border-radius: 10px;
+
+    transition:
+        width 0.6s ease;
+
+}
+
+
+/* ========================================================
+   FOOTER
+======================================================== */
+
+
+.recommendation-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 16px;
+
+    font-size: 12px;
+
+}
+
+
+.recommendation-footer span {
+
+    font-weight: 600;
+
+}
+
+
+.view-product-button {
+
+    padding:
+        6px 11px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    background:
+        transparent;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+
+.view-product-button:hover {
+
+    background:
+        #f1f3f8;
+
+}
+
+/* ========================================================
+   RECOMMENDATION FEEDBACK
+======================================================== */
+
+.recommendation-feedback {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 14px;
+
+    padding-top: 12px;
+
+    border-top:
+        1px solid var(--border-color);
+
+}
+
+
+.feedback-label {
+
+    font-size: 11px;
+
+    color:
+        var(--text-secondary);
+
+}
+
+
+.feedback-buttons {
+
+    display: flex;
+
+    gap: 5px;
+
+}
+
+
+.feedback-button {
+
+    width: 30px;
+
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background:
+        transparent;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.feedback-button:hover {
+
+    transform:
+        scale(1.12);
+
+    background:
+        #f1f3f8;
+
+}
+
+
+.feedback-button.selected {
+
+    background:
+        #e8ecff;
+
+    transform:
+        scale(1.1);
 
 }

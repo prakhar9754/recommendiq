@@ -3,12 +3,18 @@
 ========================================================= */
 
 
-// ========================================================
-// MOBILE SIDEBAR
-// ========================================================
+/* ========================================================
+   CURRENT CUSTOMER
+======================================================== */
+
+let currentVisitorId = null;
+
+
+/* ========================================================
+   MOBILE SIDEBAR
+======================================================== */
 
 const mobileMenu = document.getElementById("mobileMenu");
-
 const sidebar = document.getElementById("sidebar");
 
 if (mobileMenu && sidebar) {
@@ -22,9 +28,9 @@ if (mobileMenu && sidebar) {
 }
 
 
-// ========================================================
-// NAVIGATION
-// ========================================================
+/* ========================================================
+   NAVIGATION
+======================================================== */
 
 const navItems = document.querySelectorAll(".nav-item");
 
@@ -35,7 +41,9 @@ navItems.forEach((item) => {
         event.preventDefault();
 
         navItems.forEach((nav) => {
+
             nav.classList.remove("active");
+
         });
 
         this.classList.add("active");
@@ -49,9 +57,9 @@ navItems.forEach((item) => {
 });
 
 
-// ========================================================
-// QUICK ACTIONS
-// ========================================================
+/* ========================================================
+   QUICK ACTIONS
+======================================================== */
 
 const quickActions =
     document.querySelectorAll(".quick-action");
@@ -70,9 +78,9 @@ quickActions.forEach((button) => {
 });
 
 
-// ========================================================
-// GENERATE INSIGHTS BUTTON
-// ========================================================
+/* ========================================================
+   GENERATE INSIGHTS BUTTON
+======================================================== */
 
 const generateButton =
     document.querySelector(".primary-button");
@@ -100,25 +108,25 @@ if (generateButton) {
 }
 
 
-// ========================================================
-// CONSOLE MESSAGE
-// ========================================================
+/* ========================================================
+   CONSOLE MESSAGE
+======================================================== */
 
 console.log(
     "RecommendIQ frontend loaded successfully."
 );
 
 
-// ========================================================
-// FASTAPI CONNECTION
-// ========================================================
+/* ========================================================
+   FASTAPI CONNECTION
+======================================================== */
 
 const API_BASE_URL = "http://127.0.0.1:8000";
 
 
-// ========================================================
-// TEST FASTAPI CONNECTION
-// ========================================================
+/* ========================================================
+   TEST FASTAPI CONNECTION
+======================================================== */
 
 async function testAPI() {
 
@@ -159,9 +167,9 @@ async function testAPI() {
 }
 
 
-// ========================================================
-// GET CUSTOMER SEGMENT
-// ========================================================
+/* ========================================================
+   GET CUSTOMER SEGMENT
+======================================================== */
 
 async function getCustomerSegment(visitorId) {
 
@@ -202,9 +210,9 @@ async function getCustomerSegment(visitorId) {
 }
 
 
-// ========================================================
-// GET CUSTOMER RECOMMENDATIONS
-// ========================================================
+/* ========================================================
+   GET CUSTOMER RECOMMENDATIONS
+======================================================== */
 
 async function getRecommendations(visitorId) {
 
@@ -245,9 +253,9 @@ async function getRecommendations(visitorId) {
 }
 
 
-// ========================================================
-// CUSTOMER SEARCH
-// ========================================================
+/* ========================================================
+   CUSTOMER SEARCH
+======================================================== */
 
 const visitorIdInput =
     document.getElementById("visitorIdInput");
@@ -272,7 +280,13 @@ if (
                 visitorIdInput.value.trim();
 
 
-            // Check Visitor ID
+            /* Save current customer */
+
+            currentVisitorId = visitorId;
+
+
+            /* Check Visitor ID */
+
             if (!visitorId) {
 
                 alert(
@@ -284,7 +298,8 @@ if (
             }
 
 
-            // Loading state
+            /* Loading state */
+
             searchCustomerButton.innerHTML = `
                 <span>⟳</span>
                 Searching...
@@ -299,14 +314,15 @@ if (
                 );
 
 
-                // ====================================================
-                // GET CUSTOMER SEGMENT
-                // ====================================================
+                /* =========================================
+                   GET CUSTOMER SEGMENT
+                ========================================= */
 
                 const segmentData =
                     await getCustomerSegment(
                         visitorId
                     );
+
 
                 console.log(
                     "Customer data:",
@@ -323,19 +339,21 @@ if (
                 }
 
 
-                // Display customer segment
+                /* Display customer segment */
+
                 if (customerSegment) {
 
                     customerSegment.innerText =
                         segmentData.customer_segment ||
+                        segmentData.segment ||
                         "Unknown";
 
                 }
 
 
-                // ====================================================
-                // GET RECOMMENDATIONS
-                // ====================================================
+                /* =========================================
+                   GET RECOMMENDATIONS
+                ========================================= */
 
                 const recommendationData =
                     await getRecommendations(
@@ -349,11 +367,11 @@ if (
                 );
 
 
-                // Display recommendations
+                /* Display recommendations */
+
                 displayRecommendations(
                     recommendationData
                 );
-
 
             } catch (error) {
 
@@ -363,6 +381,8 @@ if (
                 );
 
 
+                /* Display error */
+
                 if (customerSegment) {
 
                     customerSegment.innerText =
@@ -371,13 +391,15 @@ if (
                 }
 
 
-                // Clear recommendations
+                /* Clear recommendations */
+
                 displayRecommendations(null);
 
             }
 
 
-            // Restore button
+            /* Restore button */
+
             searchCustomerButton.innerHTML = `
                 <span>⌕</span>
                 Search Customer
@@ -389,9 +411,9 @@ if (
 }
 
 
-// ========================================================
-// DISPLAY RECOMMENDATIONS
-// ========================================================
+/* ========================================================
+   DISPLAY RECOMMENDATIONS
+======================================================== */
 
 function displayRecommendations(data) {
 
@@ -406,6 +428,8 @@ function displayRecommendations(data) {
         );
 
 
+    /* Check recommendation container */
+
     if (!recommendationGrid) {
 
         return;
@@ -413,11 +437,15 @@ function displayRecommendations(data) {
     }
 
 
-    // Clear previous recommendations
+    /* Clear previous recommendations */
+
     recommendationGrid.innerHTML = "";
 
 
-    // Handle empty response
+    /* ====================================================
+       HANDLE EMPTY RESPONSE
+    ==================================================== */
+
     if (!data) {
 
         recommendationGrid.innerHTML = `
@@ -439,19 +467,34 @@ function displayRecommendations(data) {
             </div>
         `;
 
+
+        if (recommendationStatus) {
+
+            recommendationStatus.innerText =
+                "0 items found";
+
+        }
+
+
         return;
 
     }
 
 
-    // Get recommendation list
+    /* ====================================================
+       GET RECOMMENDATION LIST
+    ==================================================== */
+
     const recommendations =
         data.recommendations ||
         data.items ||
         data;
 
 
-    // Check if recommendations exist
+    /* ====================================================
+       CHECK RECOMMENDATIONS
+    ==================================================== */
+
     if (
         !Array.isArray(recommendations) ||
         recommendations.length === 0
@@ -476,6 +519,7 @@ function displayRecommendations(data) {
             </div>
         `;
 
+
         if (recommendationStatus) {
 
             recommendationStatus.innerText =
@@ -483,12 +527,16 @@ function displayRecommendations(data) {
 
         }
 
+
         return;
 
     }
 
 
-    // Update status
+    /* ====================================================
+       UPDATE RECOMMENDATION COUNT
+    ==================================================== */
+
     if (recommendationStatus) {
 
         recommendationStatus.innerText =
@@ -497,15 +545,22 @@ function displayRecommendations(data) {
     }
 
 
-    // Create recommendation cards
+    /* ====================================================
+       CREATE RECOMMENDATION CARDS
+    ==================================================== */
+
     recommendations.forEach(
         (item, index) => {
+
+            /* Get item ID */
 
             const itemId =
                 typeof item === "object"
                     ? item.itemid
                     : item;
 
+
+            /* Create card */
 
             const card =
                 document.createElement("div");
@@ -515,12 +570,55 @@ function displayRecommendations(data) {
                 "recommendation-card";
 
 
+            /* =================================================
+               RECOMMENDATION SCORE
+            ================================================= */
+
+            const score =
+                typeof item === "object"
+                    ? item.recommendation_score
+                    : null;
+
+
+            let scorePercentage = null;
+
+
+            if (
+                score !== null &&
+                score !== undefined &&
+                !isNaN(Number(score))
+            ) {
+
+                scorePercentage =
+                    Math.round(
+                        Number(score) * 100
+                    );
+
+            }
+
+
+            /* Score display */
+
+            const scoreDisplay =
+                scorePercentage !== null
+                    ? `${scorePercentage}%`
+                    : "AI";
+
+
+            /* =================================================
+               CARD HTML
+            ================================================= */
+
             card.innerHTML = `
 
                 <div class="recommendation-image">
 
-                    <span>
+                    <span class="recommendation-icon">
                         ✦
+                    </span>
+
+                    <span class="recommendation-rank">
+                        #${index + 1}
                     </span>
 
                 </div>
@@ -528,23 +626,60 @@ function displayRecommendations(data) {
 
                 <div class="recommendation-content">
 
-                    <span class="recommendation-number">
-                        #${index + 1}
-                    </span>
+                    <div class="recommendation-top">
+
+                        <span class="recommendation-label">
+                            AI PICK
+                        </span>
+
+                        <span class="recommendation-score">
+                            ${scoreDisplay}
+                        </span>
+
+                    </div>
+
 
                     <h4>
                         Product ${itemId}
                     </h4>
 
+
                     <p>
-                        Recommended for you
+                        Recommended based on
+                        customer behavior
                     </p>
+
+
+                    <div class="score-container">
+
+                        <div class="score-bar">
+
+                            <div
+                                class="score-progress"
+                                style="width: ${
+                                    scorePercentage !== null
+                                        ? scorePercentage
+                                        : 85
+                                }%"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
 
                     <div class="recommendation-footer">
 
                         <span>
-                            AI Recommended
+                            ✦ Personalized
                         </span>
+
+                        <button
+                            class="view-product-button"
+                            type="button"
+                        >
+                            View
+                        </button>
 
                     </div>
 
@@ -553,7 +688,44 @@ function displayRecommendations(data) {
             `;
 
 
-            recommendationGrid.appendChild(card);
+            /* =================================================
+               ADD CARD TO PAGE
+            ================================================= */
+
+            recommendationGrid.appendChild(
+                card
+            );
+
+
+            /* =================================================
+               VIEW PRODUCT BUTTON
+            ================================================= */
+
+            const viewButton =
+                card.querySelector(
+                    ".view-product-button"
+                );
+
+
+            if (viewButton) {
+
+                viewButton.addEventListener(
+                    "click",
+                    () => {
+
+                        console.log(
+                            "Selected product:",
+                            itemId
+                        );
+
+                        alert(
+                            `Product ${itemId} selected`
+                        );
+
+                    }
+                );
+
+            }
 
         }
     );
@@ -561,8 +733,8 @@ function displayRecommendations(data) {
 }
 
 
-// ========================================================
-// RUN API CONNECTION TEST
-// ========================================================
+/* ========================================================
+   RUN API CONNECTION TEST
+======================================================== */
 
 testAPI();

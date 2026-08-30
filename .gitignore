@@ -4,3 +4,4 @@ notebooks/.ipynb_checkpoints/
 src/__pycache__/
 models/
 artifacts/
+.env

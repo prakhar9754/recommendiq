@@ -25,6 +25,13 @@ The recommendation engine combines customer behavior, recommendation scores, fee
 - Prepare the application for Docker containerization and cloud deployment
 
 ---
+## 🚀 Live API
+
+**Render Deployment:**  
+https://recommendiq-api.onrender.com
+
+**API Documentation (Swagger):**  
+https://recommendiq-api.onrender.com/docs
 
 # Current Project Workflow
 
